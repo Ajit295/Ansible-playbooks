@@ -1,0 +1,33 @@
+---
+
+- name: Playbook to uninstall httpd server from all server
+  hosts: all
+  become: true
+  tasks:
+  - name: stop httpd service
+    service:
+      name: httpd
+      state: stopped
+    when: ansible_os_family == "RedHat"
+    tags: stop_service
+
+  - name: uninstall httpd from webserves
+    yum:
+      name: httpd
+      state: removed
+    when: ansible_os_family == "RedHat"
+    tags: uninstall_httpd
+
+  - name: stop apache2 service
+    service:
+      name: apache2
+      state: stopped
+    when: ansible_os_family == "Debian"
+    tags: stop_service
+
+  - name: uninstall apache2 from dbserver
+    apt:
+      name: apache2
+      state: absent
+    when: ansible_os_family == "Debian"
+    tags: uninstall_httpd

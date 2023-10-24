@@ -1,0 +1,10 @@
+[webservers]
+RedHat-Managed-Node ansible_host=172.31.19.41
+Amazon-Managed-Node ansible_host=172.31.28.22
+
+[appserver]
+Amazon-Managed-Node ansible_host=172.31.28.22
+
+[dbserver]
+Ubuntu-Managed-Node ansible_host=172.31.31.136
+

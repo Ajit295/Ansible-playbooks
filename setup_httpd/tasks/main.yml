@@ -1,0 +1,32 @@
+---
+# tasks file for setup_httpd
+- name: Install httpd on Redhat servers
+  yum:
+    name: httpd
+    state: installed
+  when: ansible_os_family == "RedHat"
+  notify: Start httpd
+
+- name: Install apache2 on Ubuntu server
+  apt:
+    name: apache2
+    state: present
+  when: ansible_os_family == "Debian"
+  notify: Start apache2
+
+- name: Copy the files
+  copy:
+    src: /opt/ansible/setup_httpd/files/index.html
+    dest: /var/www/html
+    mode: 0666
+
+- name: Ensure the default Apache port is {{ 8080 }} on RedHat servers
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^Listen '
+    insertafter: '^#Listen 12.34.56.78:80 '
+    line: Listen {{ 8080 }}
+  when: ansible_os_family == "RedHat"
+  notify: Restart httpd service on RedHat servers
+
+  

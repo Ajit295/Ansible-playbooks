@@ -1,0 +1,10 @@
+---
+
+- name: Copy code to target server
+  hosts: appserver
+  become: yes
+  tasks:
+  - name: Copy git repo to app server
+    git:
+      repo: 'https://github.com/Ajit295/simple-java-maven-app.git'
+      dest: /opt/ansible/test

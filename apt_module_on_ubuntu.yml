@@ -1,0 +1,15 @@
+---
+
+- name: Install httpd on Ubuntu server
+  hosts: dbserver
+  become: true
+  tasks:
+  - name: Install apache2 on Ubuntu server
+    apt:
+      name: apache2
+      state: present
+
+  - name: Start apache2 on Ubuntu server
+    service:
+      name: apache2
+      state: stopped

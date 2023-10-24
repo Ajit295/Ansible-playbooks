@@ -1,0 +1,12 @@
+---
+
+- name: This playbook will copy the module from control to target node
+  hosts: all
+  become: true
+  tasks:
+  - name: copy file form source to destination
+    copy:
+      src: /opt/ansible/index.html
+      dest: /home/ansadmin/index.html
+      mode: '0600'
+      owner: john

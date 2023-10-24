@@ -1,0 +1,10 @@
+---
+
+- name: This playbook will install package using yum module
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: install git
+    yum:
+      name: ["tree", "git", "make", "telnet"]     #installing multiple packages using list
+      state: installed

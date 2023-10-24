@@ -1,0 +1,12 @@
+---
+
+- name: This playbook will create user
+  hosts: webservers
+  vars_files:
+    - variable.yml
+  become: yes
+  tasks:
+  - name: Create user {{ user }} 
+    user:
+      name: "{{ user }}"
+     
